@@ -130,7 +130,6 @@ if [[ "${binfmt_misc_required}" == "1" ]]; then
   fi
 fi
 
-
 trap 'echo "got CTRL+C... please wait 5s" && ${DOCKER} stop -t 5 ${DOCKER_CMDLINE_NAME}' SIGINT SIGTERM
 time ${DOCKER} run \
   $DOCKER_CMDLINE_PRE \
@@ -139,10 +138,6 @@ time ${DOCKER} run \
   ${PIGEN_DOCKER_OPTS} \
   --volume "${CONFIG_FILE}":/config:ro \
   -e "GIT_HASH=${GIT_HASH}" \
-  -v $HOME/.ccache:/ccache \
-  -e CCACHE_DIR=/ccache \
-  -e CCACHE_BASEDIR=/src \
-  -e CCACHE_NOHASHDIR=1 \
   $DOCKER_CMDLINE_POST \
   pi-gen \
   bash -e -o pipefail -c "

@@ -1,12 +1,7 @@
-ARG BASE_IMAGE=debian:trixie
+ARG BASE_IMAGE=debian:bullseye
 FROM ${BASE_IMAGE}
 
 ENV DEBIAN_FRONTEND=noninteractive
-
-RUN sed -i \
-  's/^Components: .*/Components: main contrib non-free non-free-firmware/' \
-  /etc/apt/sources.list.d/debian.sources \
- && apt-get update
 
 RUN apt-get -y update && \
     apt-get -y install --no-install-recommends \
